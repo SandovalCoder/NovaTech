@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 const Hero = () => {
   return (
     <section className="relative flex flex-col items-center max-w-screen-xl px-4 mx-auto sm:px-6 p-8 md:flex-row">

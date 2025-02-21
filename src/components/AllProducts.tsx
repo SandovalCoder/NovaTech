@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,8 +7,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "../components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
 import {
   Pagination,
   PaginationContent,
@@ -16,7 +21,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from "../components/ui/pagination";
 
 // Simulación de productos reales
 const products = [
@@ -81,7 +86,7 @@ const AllProducts = () => {
   const itemsPerPage = 6;
 
   // Componente interno para listar productos según la categoría y paginar
-  const ProductList = ({ category }) => {
+  const ProductList = ({ category }: { category: string }) => {
     const filteredProducts =
       category === "todos"
         ? products
@@ -123,20 +128,22 @@ const AllProducts = () => {
         {totalPages > 1 && (
           <Pagination className="mt-8 flex justify-center items-center">
             <PaginationPrevious
+              size="medium"
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             />
             <PaginationContent className="flex gap-2">
               {Array.from({ length: totalPages }, (_, i) => (
                 <PaginationItem
                   key={i}
-                  active={currentPage === i + 1}
+                  className={currentPage === i + 1 ? "active" : ""}
                   onClick={() => setCurrentPage(i + 1)}
                 >
-                  <PaginationLink>{i + 1}</PaginationLink>
+                  <PaginationLink size="medium">{i + 1}</PaginationLink>
                 </PaginationItem>
               ))}
             </PaginationContent>
             <PaginationNext
+              size="medium"
               onClick={() =>
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }

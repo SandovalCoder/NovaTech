@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import Logo from "../assets/Logo.png";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 // Configuración centralizada de las rutas del navbar.
 const menuOptions = [

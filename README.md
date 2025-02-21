@@ -1,50 +1,52 @@
-# React + TypeScript + Vite
+# NovaTech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NovaTech es una aplicación de comercio electrónico moderna dedicada a la venta de tecnologías de punta: smartphones, laptops, televisores y más. Este template te ofrece una configuración mínima para arrancar rápidamente con React, TypeScript y Vite, integrando además Tailwind CSS para estilos y shadcn/ui para componentes UI de alta calidad.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React + TypeScript + Vite:** Un entorno ágil y moderno con Hot Module Replacement (HMR) para un desarrollo rápido y eficiente.
+- **Tailwind CSS:** Diseña de forma rápida y personalizable. Además, se han extendido colores personalizados (por ejemplo, `sombrero`, `banda`, `orbita`) para lograr una identidad visual única en NovaTech.
+- **shadcn/ui:** Conjunto de componentes preconstruidos y estilizados que aceleran el desarrollo de interfaces coherentes y profesionales.
+- **ESLint Configurado:** Un setup inicial de ESLint con posibilidad de ampliar la configuración para reglas _type-aware_, garantizando calidad y consistencia en el código.
 
-## Expanding the ESLint configuration
+## ¿Para quién es este template?
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Este template está diseñado para desarrolladores y equipos que quieran:
 
-- Configure the top-level `parserOptions` property like this:
+- Iniciar proyectos modernos y escalables utilizando lo último en tecnología web.
+- Construir aplicaciones de e-commerce con una experiencia de usuario excepcional.
+- Aprovechar la velocidad y eficiencia de Vite junto con el tipado seguro de TypeScript.
+- Integrar estilos y componentes UI consistentes mediante Tailwind CSS y shadcn/ui.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Instalación y Ejecución
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Sigue estos pasos para clonar y ejecutar el proyecto en tu entorno local:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Clona el repositorio:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+git clone https://github.com/SandovalCoder/NovaTech.git  
+cd novatech
+
+### Instala las dependencias:
+
+Usa npm o yarn según prefieras:
+
+npm install
+
+# o
+
+yarn install
+
+### Inicia el servidor de desarrollo:
+
+Con npm:
+
+npm run dev
+
+Con yarn:
+
+yarn dev
+
+### Abre la aplicación en tu navegador:
+
+Vite te indicará la URL (por ejemplo, http://localhost:5173/) para visualizar la aplicación en funcionamiento.

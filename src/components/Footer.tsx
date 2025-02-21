@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Github, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import Logo from "../assets/Logo.png";
 
 const Footer = () => {
