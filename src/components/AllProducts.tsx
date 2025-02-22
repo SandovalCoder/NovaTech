@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,13 +7,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../components/ui/tabs";
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Pagination,
   PaginationContent,
@@ -21,7 +16,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "../components/ui/pagination";
+} from "@/components/ui/pagination";
 
 // Simulación de productos reales
 const products = [
@@ -78,7 +73,16 @@ const products = [
     image: "https://cdn.mos.cms.futurecdn.net/YkjkdYkHYMJ6Ju2CrRpvjA.jpg",
     price: "S/ 7,299",
   },
-  // Puedes agregar más productos según sea necesario
+  {
+    id: 7,
+    name: "Sony WH-1000XM4",
+    category: "audifonos",
+    description:
+      "Audifonos de alta calidad con tecnología de alto rendimiento.",
+    image:
+      "https://images.idgesg.net/images/article/2020/09/5j0a0247_final-100857111-orig.jpg",
+    price: "S/ 2,999",
+  },
 ];
 
 const AllProducts = () => {
@@ -128,7 +132,6 @@ const AllProducts = () => {
         {totalPages > 1 && (
           <Pagination className="mt-8 flex justify-center items-center">
             <PaginationPrevious
-              size="medium"
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             />
             <PaginationContent className="flex gap-2">
@@ -138,12 +141,11 @@ const AllProducts = () => {
                   className={currentPage === i + 1 ? "active" : ""}
                   onClick={() => setCurrentPage(i + 1)}
                 >
-                  <PaginationLink size="medium">{i + 1}</PaginationLink>
+                  <PaginationLink>{i + 1}</PaginationLink>
                 </PaginationItem>
               ))}
             </PaginationContent>
             <PaginationNext
-              size="medium"
               onClick={() =>
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }

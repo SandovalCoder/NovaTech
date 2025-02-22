@@ -1,10 +1,10 @@
 import React from "react";
-import { cn } from "../lib/utils";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Logo from "../assets/Logo.png";
-import { Textarea } from "../components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 
 function Contact() {
   return (
