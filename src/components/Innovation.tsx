@@ -8,49 +8,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const innovations = [
-  {
-    id: 1,
-    title: "Realidad Virtual Inmersiva",
-    description: "Explora nuevos mundos con la última tecnología en VR.",
-    image:
-      "https://imascono.com/wp-content/uploads/2023/07/Realidad-virtual-inmersiva.jpg",
-  },
-  {
-    id: 2,
-    title: "Smart Home Integrado",
-    description:
-      "Controla tu hogar con dispositivos conectados y automatizados.",
-    image:
-      "https://albukairiyah.com/wp-content/uploads/2020/04/Home-Smart-Tech-1024x576.jpg",
-  },
-  {
-    id: 3,
-    title: "Coches Autónomos",
-    description:
-      "La movilidad del futuro está aquí con tecnología de conducción autónoma.",
-    image:
-      "https://quees.mobi/wp-content/uploads/2021/01/vehiculos-autonomos.jpg",
-  },
-  {
-    id: 4,
-    title: "Drones de Última Generación",
-    description: "Captura imágenes y videos desde ángulos imposibles.",
-    image:
-      "https://img.freepik.com/fotos-premium/primer-plano-dron-ultima-generacion-accion-que-captura-su-precision-versatilidad_909576-940.jpg",
-  },
-];
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import Innovations from "@/types/Innovations";
+
 
 const Innovation = () => {
   return (
     <section className="container mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-center mb-2">Novedades</h2>
-      <p className="text-center text-gray-600 mb-8">
+      <p className="text-center text-gray-600 mb-8 mt-4">
         Aquí podrás ver las últimas innovaciones en tecnología, tendencias y
         avances que están marcando el futuro.
       </p>
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {innovations.map((item) => (
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {Innovations.map((item) => (
           <Card key={item.id} className="flex flex-col">
             <CardHeader>
               <CardTitle>{item.title}</CardTitle>
@@ -64,9 +42,39 @@ const Innovation = () => {
               <CardDescription>{item.description}</CardDescription>
             </CardContent>
             <CardFooter className="flex justify-center">
-              <Button className="bg-sombrero hover:bg-sombrero/80 text-white">
-                Ver Detalles
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="w-full bg-orbita hover:bg-orbita/90 text-white text-lg">
+                    Más información
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="w-[95vw] max-w-[95vw] sm:max-w-[90vw] md:max-w-[800px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 bg-gradient-to-br from-white to-gray-50">
+                  {item.details.map((detail) => (
+                    <div key={detail.id} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+                      {/* Sección de Imagen */}
+                      <div className="relative h-48 sm:h-64 md:h-96 group">
+                        <img
+                          src={detail.image}
+                          alt={detail.title}
+                          className="rounded-xl object-cover w-full h-full shadow-lg transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+
+                      {/* Sección de Información */}
+                      <div className="flex flex-col gap-4 sm:gap-6">
+                        <DialogHeader className="space-y-2 sm:space-y-3">
+                          <DialogTitle className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-orbita to-green-400 bg-clip-text text-transparent">
+                            {detail.title}
+                          </DialogTitle>
+                          <DialogDescription className="text-base sm:text-lg text-gray-600 leading-relaxed space-y-2 sm:space-y-4">
+                            <p>{detail.description}</p>
+                          </DialogDescription>
+                        </DialogHeader>
+                      </div>
+                    </div>
+                  ))}
+                </DialogContent>
+              </Dialog>
             </CardFooter>
           </Card>
         ))}

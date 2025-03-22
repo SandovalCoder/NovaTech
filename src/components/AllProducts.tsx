@@ -18,72 +18,17 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-// Simulación de productos reales
-const products = [
-  {
-    id: 1,
-    name: "Apple iPhone 14",
-    category: "celular",
-    description: "Smartphone innovador con cámara avanzada.",
-    image:
-      "https://manofmany.com/wp-content/uploads/2022/09/iPhone-14-pro-Max-1200x900.jpg",
-    price: "S/ 4,499",
-  },
-  {
-    id: 2,
-    name: "Samsung Galaxy S23",
-    category: "celular",
-    description: "Smartphone de alta gama con diseño moderno.",
-    image:
-      "https://www.androidauthority.com/wp-content/uploads/2023/01/samsung-galaxy-s23-lineup-standing.jpg",
-    price: "S/ 3,999",
-  },
-  {
-    id: 3,
-    name: "Dell XPS 15",
-    category: "laptop",
-    description: "Laptop premium para profesionales creativos.",
-    image:
-      "https://cdn.mos.cms.futurecdn.net/5PxxHa4jXrwmGdKZpTWuZi-1200-80.jpg",
-    price: "S/ 6,499",
-  },
-  {
-    id: 4,
-    name: "Apple MacBook Pro",
-    category: "laptop",
-    description: "Máxima potencia y rendimiento en un diseño elegante.",
-    image:
-      "https://www.bhphotovideo.com/images/images2500x2500/apple_mbp_14_sg_24_14_2_macbook_pro_with_1668224.jpg",
-    price: "S/ 8,999",
-  },
-  {
-    id: 5,
-    name: "Sony Bravia 4K TV",
-    category: "televisor",
-    description: "Televisor 4K para una experiencia visual inigualable.",
-    image:
-      "https://www.worten.pt/i/5e71c13603c78c375656a572232eb1ee7a28ecb1.jpg",
-    price: "S/ 5,999",
-  },
-  {
-    id: 6,
-    name: "LG OLED TV",
-    category: "televisor",
-    description: "Tecnología OLED para colores vibrantes y negros profundos.",
-    image: "https://cdn.mos.cms.futurecdn.net/YkjkdYkHYMJ6Ju2CrRpvjA.jpg",
-    price: "S/ 7,299",
-  },
-  {
-    id: 7,
-    name: "Sony WH-1000XM4",
-    category: "audifonos",
-    description:
-      "Audifonos de alta calidad con tecnología de alto rendimiento.",
-    image:
-      "https://images.idgesg.net/images/article/2020/09/5j0a0247_final-100857111-orig.jpg",
-    price: "S/ 2,999",
-  },
-];
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import Products from "@/types/Products";
 
 const AllProducts = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,8 +38,8 @@ const AllProducts = () => {
   const ProductList = ({ category }: { category: string }) => {
     const filteredProducts =
       category === "todos"
-        ? products
-        : products.filter((p) => p.category === category);
+        ? Products
+        : Products.filter((p) => p.category === category);
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentProducts = filteredProducts.slice(
@@ -114,7 +59,7 @@ const AllProducts = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="mb-4 rounded-md object-cover w-full h-48"
+                  className="mb-4 rounded-md object-cover w-full h-80"
                 />
                 <CardDescription>{product.description}</CardDescription>
                 <p className="mt-2 text-xl font-bold text-gray-800">
@@ -122,9 +67,60 @@ const AllProducts = () => {
                 </p>
               </CardContent>
               <CardFooter className="flex justify-center">
-                <Button className="bg-sombrero hover:bg-sombrero/80 text-white">
-                  Comprar
-                </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="w-full bg-orbita hover:bg-orbita/90 text-white text-lg ">Comprar</Button>
+                </DialogTrigger>
+                <DialogContent className="w-[95vw] max-w-[95vw] sm:max-w-[90vw] md:max-w-[800px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 bg-white">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+                    {/* Sección de Imagen */}
+                    <div className="relative h-48 sm:h-64 md:h-96 group">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="rounded-xl object-cover w-full h-full shadow-lg transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-xl" />
+                    </div>
+
+                    {/* Sección de Información */}
+                    <div className="flex flex-col gap-4 sm:gap-6">
+                      <DialogHeader className="space-y-2">
+                        <DialogTitle className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-orbita to-green-400 bg-clip-text text-transparent">
+                          {product.name}
+                        </DialogTitle>
+                        <DialogDescription className="text-base sm:text-lg text-gray-600">
+                          {product.description}
+                        </DialogDescription>
+                      </DialogHeader>
+
+                      <div className="space-y-4 border-t border-b border-gray-100 py-4">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                          <Label className="text-gray-600 font-medium">Precio:</Label>
+                          <p className="text-xl sm:text-2xl font-bold text-orbita">
+                            {product.price}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                          <Label className="text-gray-600 font-medium">Categoría:</Label>
+                          <span className="px-3 py-1 bg-orbita/10 text-orbita rounded-full text-sm font-medium">
+                            {product.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <DialogFooter className="mt-2 sm:mt-4">
+                        <Button 
+                          className="w-full bg-orbita hover:bg-orbita/90 text-white py-4 sm:py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+                        >
+                          Agregar al carrito
+                        </Button>
+                      </DialogFooter>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
               </CardFooter>
             </Card>
           ))}
@@ -157,16 +153,17 @@ const AllProducts = () => {
   };
 
   return (
-    <section className="container mx-auto px-4 py-12">
+    <section className="container mx-auto px-2 py-12">
       <Tabs
         defaultValue="todos"
         onValueChange={() => setCurrentPage(1)} // Reinicia la paginación al cambiar de pestaña
       >
         <TabsList className="mb-8">
-          <TabsTrigger value="todos">Todos</TabsTrigger>
-          <TabsTrigger value="laptop">Laptops</TabsTrigger>
-          <TabsTrigger value="celular">Celulares</TabsTrigger>
-          <TabsTrigger value="televisor">Televisores</TabsTrigger>
+          <TabsTrigger value="todos" >Todos</TabsTrigger>
+          <TabsTrigger value="laptop" >Laptops</TabsTrigger>
+          <TabsTrigger value="celular" >Celulares</TabsTrigger>
+          <TabsTrigger value="televisor" >Televisores</TabsTrigger>
+          <TabsTrigger value="audifonos" >Audifonos</TabsTrigger>
         </TabsList>
         <TabsContent value="todos">
           <ProductList category="todos" />
@@ -179,6 +176,9 @@ const AllProducts = () => {
         </TabsContent>
         <TabsContent value="televisor">
           <ProductList category="televisor" />
+        </TabsContent>
+        <TabsContent value="audifonos">
+          <ProductList category="audifonos" />
         </TabsContent>
       </Tabs>
     </section>

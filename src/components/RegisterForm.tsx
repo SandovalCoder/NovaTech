@@ -3,21 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
+import { Link } from "react-router-dom";
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div className="w-full max-w-sm md:max-w-3xl mx-auto p-6 py-24">
+    <div className="w-full max-w-md md:max-w-5xl mx-auto p-6 py-24">
       <div className={cn("flex flex-col gap-6", className)} {...props}>
         <Card className="overflow-hidden">
           <CardContent className="grid p-0 md:grid-cols-2">
             <form className="p-6 md:p-8">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
-                  <h1 className="text-2xl font-bold">Crear una cuenta</h1>
-                  <p className="text-balance text-muted-foreground">
+                  <h1 className="text-3xl font-bold">Crear una cuenta</h1>
+                  <p className="text-balance text-muted-foreground mt-2">
                     Regístrate en NovaTech para comenzar
                   </p>
                 </div>
@@ -64,7 +64,7 @@ export function RegisterForm({
 
                 <Button
                   type="submit"
-                  className="w-full bg-sombrero text-white hover:bg-sombrero/80"
+                  className="w-full bg-sombrero text-white text-md hover:bg-sombrero/80"
                 >
                   Registrarse
                 </Button>
@@ -101,9 +101,12 @@ export function RegisterForm({
 
                 <div className="text-center text-sm">
                   ¿Ya tienes una cuenta?{" "}
-                  <a href="#" className="underline underline-offset-4">
+                  <Link
+                    to="/LoginForm"
+                    className="hover:text-orbita hover:underline underline-offset-4"
+                  >
                     Iniciar sesión
-                  </a>
+                  </Link>
                 </div>
               </div>
             </form>

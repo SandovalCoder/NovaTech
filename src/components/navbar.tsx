@@ -19,8 +19,8 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-background/80 backdrop-blur-md border-b shadow-sm fixed w-full top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-gradient-to-r from-sombrero to-orbita text-white backdrop-blur-md  shadow-md fixed w-full top-0 z-50">
+      <div className="container mx-auto px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link
@@ -40,7 +40,7 @@ const Navbar = () => {
                 <Link
                   key={label}
                   to={path}
-                  className="text-sm font-medium text-foreground/80 hover:text-orbita hover:underline underline-offset-4 transition-colors"
+                  className="text-lg font-medium text-white hover:text-orbita hover:underline underline-offset-4 transition-colors"
                 >
                   {label}
                 </Link>
@@ -53,14 +53,14 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
               <Button
                 className={cn(
-                  "bg-white text-black",
+                  "bg-white text-sombrero text-md",
                   "hover:bg-orbita hover:text-white"
                 )}
                 asChild
               >
                 <Link to="/loginform">Iniciar Sesión</Link>
               </Button>
-              <Button className="bg-sombrero hover:bg-sombrero/80" asChild>
+              <Button className="bg-sombrero hover:bg-sombrero/80 text-md" asChild>
                 <Link to="/RegisterForm">Registrarse</Link>
               </Button>
             </div>
@@ -82,14 +82,14 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden absolute top-16 inset-x-0 bg-background border-b shadow-lg"
+            className="md:hidden absolute top-16 inset-x-0 bg-gradient-to-r from-sombrero to-orbita text-white backdrop-blur-md border-b shadow-lg"
           >
             <div className="px-4 py-4 space-y-4">
               {menuOptions.map(({ label, path }) => (
                 <Link
                   key={label}
                   to={path}
-                  className="block py-2 px-3 rounded-lg hover:bg-accent transition-colors"
+                  className="block py-2 px-3 rounded-lg hover:bg-white hover:text-black transition-colors"
                   onClick={toggleMenu}
                 >
                   {label}

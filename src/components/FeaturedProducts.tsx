@@ -8,65 +8,28 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const products = [
-  {
-    id: 1,
-    name: "Apple iPhone 14",
-    description: "Innovador smartphone con rendimiento excepcional.",
-    image:
-      "https://manofmany.com/wp-content/uploads/2022/09/iPhone-14-pro-Max-1200x900.jpg",
-    price: "S/ 4,499",
-  },
-  {
-    id: 2,
-    name: "Samsung Galaxy S23",
-    description: "Smartphone de alta gama con cámara revolucionaria.",
-    image:
-      "https://www.androidauthority.com/wp-content/uploads/2023/01/samsung-galaxy-s23-lineup-standing.jpg",
-    price: "S/ 3,999",
-  },
-  {
-    id: 3,
-    name: "Sony Bravia 4K TV",
-    description: "Televisor 4K para una experiencia visual inmersiva.",
-    image:
-      "https://www.worten.pt/i/5e71c13603c78c375656a572232eb1ee7a28ecb1.jpg",
-    price: "S/ 5,999",
-  },
-  {
-    id: 4,
-    name: "Dell XPS 15",
-    description: "Laptop premium con rendimiento profesional.",
-    image:
-      "https://cdn.mos.cms.futurecdn.net/5PxxHa4jXrwmGdKZpTWuZi-1200-80.jpg",
-    price: "S/ 6,499",
-  },
-  {
-    id: 5,
-    name: "Apple AirPods Pro",
-    description: "Auriculares inalámbricos con cancelación de ruido activa.",
-    image:
-      "https://macmagazine.com.br/wp-content/uploads/2022/09/Apple-AirPods-Pro-2nd-gen-hero-220907.jpg",
-    price: "S/ 1,299",
-  },
-  {
-    id: 6,
-    name: "Apple iPad Pro",
-    description: "Tablet potente para productividad y entretenimiento.",
-    image:
-      "https://s.yimg.com/os/creatr-uploaded-images/2021-05/96cfbee2-b84a-11eb-9ffe-69eb1ae41eb7",
-    price: "S/ 3,499",
-  },
-];
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+
+import Products from "@/types/Products";
 
 const FeaturedProducts = () => {
+  const filteredProducts = Products.filter((_, index) => index % 2 === 0).slice(0, 6);
   return (
     <section className="container mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">
+      <h2 className="text-4xl  font-bold text-center mb-8">
         Productos Destacados
       </h2>
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <Card key={product.id} className="flex flex-col">
             <CardHeader>
               <CardTitle>{product.name}</CardTitle>
@@ -75,7 +38,7 @@ const FeaturedProducts = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="mb-4 rounded-md object-cover w-full h-48"
+                className="mb-4 rounded-md object-cover w-full h-80"
               />
               <CardDescription>{product.description}</CardDescription>
               <p className="mt-2 text-xl font-bold text-gray-800">
@@ -83,9 +46,60 @@ const FeaturedProducts = () => {
               </p>
             </CardContent>
             <CardFooter className="flex justify-center">
-              <Button className="bg-sombrero hover:bg-sombrero/80 text-white">
-                Ver más
-              </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="w-full bg-orbita hover:bg-orbita/90 text-white text-lg ">Ver más</Button>
+              </DialogTrigger>
+              <DialogContent className="w-[95vw] max-w-[95vw] sm:max-w-[90vw] md:max-w-[800px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 bg-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+                  {/* Sección de Imagen */}
+                  <div className="relative h-48 sm:h-64 md:h-96 group">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="rounded-xl object-cover w-full h-full shadow-lg transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-xl" />
+                  </div>
+
+                  {/* Sección de Información */}
+                  <div className="flex flex-col gap-4 sm:gap-6">
+                    <DialogHeader className="space-y-2">
+                      <DialogTitle className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-orbita to-green-400 bg-clip-text text-transparent">
+                        {product.name}
+                      </DialogTitle>
+                      <DialogDescription className="text-base sm:text-lg text-gray-600">
+                        {product.description}
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4 border-t border-b border-gray-100 py-4">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <Label className="text-gray-600 font-medium">Precio:</Label>
+                        <p className="text-xl sm:text-2xl font-bold text-orbita">
+                          {product.price}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <Label className="text-gray-600 font-medium">Categoría:</Label>
+                        <span className="px-3 py-1 bg-orbita/10 text-orbita rounded-full text-sm font-medium">
+                          {product.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    <DialogFooter className="mt-2 sm:mt-4">
+                      <Button 
+                        className="w-full bg-orbita hover:bg-orbita/90 text-white py-4 sm:py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+                      >
+                        Comprar Ahora
+                      </Button>
+                    </DialogFooter>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
             </CardFooter>
           </Card>
         ))}
